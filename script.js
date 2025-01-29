@@ -18,7 +18,7 @@ buttons.forEach(button => {
 document.addEventListener('keydown', (e) => {
     const key = e.key;
     const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '.', '%', 'Enter', 'Backspace', 'Escape'];
-    
+
     if (validKeys.includes(key)) {
         e.preventDefault();
         if (key === 'Enter') {
@@ -35,7 +35,7 @@ document.addEventListener('keydown', (e) => {
 
 // Handle input from both clicks and keyboard
 function handleInput(value) {
-    switch(value) {
+    switch (value) {
         case 'C':
             clearInput();
             break;
@@ -52,7 +52,7 @@ function updateExpression(value) {
     if (input.value === '0' || input.value === 'Error') {
         input.value = '';
     }
-    
+
     // Handle special cases after result
     if (lastResult !== '') {
         if ('0123456789('.includes(value)) {
@@ -63,11 +63,11 @@ function updateExpression(value) {
             lastResult = '';
         }
     }
-    
+
     // Add the new value and update display
     expression += value;
     input.value = expression;
-    
+
     // Ensure cursor stays at the end for RTL input
     input.scrollLeft = input.scrollWidth;
 }
@@ -77,18 +77,18 @@ function calculateResult() {
     try {
         // Replace % with /100
         let evalExpression = expression.replace(/%/g, '/100');
-        
+
         // Evaluate the expression
         let result = eval(evalExpression);
-        
+
         // Handle division by zero
         if (!isFinite(result)) {
             throw new Error('Division by zero');
         }
-        
+
         // Format the result
         result = Number(result.toFixed(10)).toString();
-        
+
         // Add to history
         if (expression !== result) {
             calculationHistory.unshift({
@@ -101,7 +101,7 @@ function calculateResult() {
                 calculationHistory.pop();
             }
         }
-        
+
         input.value = result;
         lastResult = result;
         expression = result;
@@ -154,13 +154,13 @@ historyBtn.addEventListener('click', () => {
         alert('No calculation history yet');
         return;
     }
-    
+
     let historyText = 'Recent Calculations:\n\n';
     calculationHistory.forEach((calc, index) => {
         const dateTime = calc.timestamp.toLocaleDateString() + ' ' + calc.timestamp.toLocaleTimeString();
         historyText += `${index + 1}. ${calc.expression} = ${calc.result}\n   ${dateTime}\n\n`;
     });
-    
+
     alert(historyText);
 });
 
