@@ -14,7 +14,7 @@ buttons.forEach(button => {
 document.addEventListener('keydown', (e) => {
     const key = e.key;
     const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '.', '%', 'Enter', 'Backspace', 'Escape'];
-
+    
     if (validKeys.includes(key)) {
         e.preventDefault();
         if (key === 'Enter') {
@@ -30,7 +30,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 function handleInput(value) {
-    switch (value) {
+    switch(value) {
         case 'C':
             clearInput();
             break;
@@ -69,6 +69,7 @@ function calculateResult() {
 
         let result = eval(evalExpression);
 
+        // Handle division by zero
         if (!isFinite(result)) {
             throw new Error('Division by zero');
         }
@@ -86,7 +87,7 @@ function calculateResult() {
                 calculationHistory.pop();
             }
         }
-
+        
         input.value = result;
         lastResult = result;
         expression = result;
@@ -134,13 +135,13 @@ historyBtn.addEventListener('click', () => {
         alert('No calculation history yet');
         return;
     }
-
+    
     let historyText = 'Recent Calculations:\n\n';
     calculationHistory.forEach((calc, index) => {
         const dateTime = calc.timestamp.toLocaleDateString() + ' ' + calc.timestamp.toLocaleTimeString();
         historyText += `${index + 1}. ${calc.expression} = ${calc.result}\n   ${dateTime}\n\n`;
     });
-
+    
     alert(historyText);
 });
 
