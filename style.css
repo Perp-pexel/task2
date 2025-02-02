@@ -56,7 +56,7 @@ button:hover{
 input{
     width: 100%;
     padding: 20px;
-    padding-right: 40px; /* Make space for the icon */
+    padding-right: 40px;
     border-radius: 10px;
     text-align: end;
 }
@@ -81,7 +81,6 @@ input::placeholder {
     color: #000;
 }
 
-/* Responsive styles */
 @media screen and (max-width: 480px) {
     .container {
         width: 95%;
