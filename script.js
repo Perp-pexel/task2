@@ -69,7 +69,6 @@ function calculateResult() {
 
         let result = eval(evalExpression);
 
-        // Handle division by zero
         if (!isFinite(result)) {
             throw new Error('Division by zero');
         }
